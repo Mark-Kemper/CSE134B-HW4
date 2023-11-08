@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "Mark Kemper's Personal Portfolio Website" content="Includes my resume, projects, and general information about me.">
+    <title>HW2</title>
+
+</head>
+<body>
+    <header>
+
+    </header>
+    <nav>
+        <a href = "./index.html">Home</a>
+        <a href = "./projects.html">Projects</a>
+        <a href = "./coursework.html">Coursework</a>
+        <a href = "./experiments.html">Experiments</a>
+    </nav>
+    <main>
+        <template id="template1">
+            <p>About</p>
+        </template>
+        <section>
+            <h1>
+                Mark Kemper
+            </h1>
+            <img src = "https://lh3.google.com/u/0/d/10LJP6xcsH9Z6Bmh1bWteR7CaF5Bz_LGt=w1366-h768-iv1" alt="Image of Mark Kemper" width="243" height="324">
+            <h2>
+                About me
+            </h2>
+            <p>
+                    Hello I'm Mark Kemper. I'm a 4th year <b>Computer Science</b> major studying at <i>University of California San Diego</i>. <br> I have worked at the <em>Art of Problem Solving</em> as a <strong> Software Engineering Intern </strong> for the past 2 summers. I am also <strong> Lead Developer </strong> in the Triton Quantiative Trading club.  
+            </p>
+            <ul>
+                <li>
+                    Primary interests: Web and phone application development
+                </li>
+                <li>
+                    Other interests: Competitive programming and quantitative trading
+                </li>
+            </ul>
+            <hr>
+        </section>
+        <h3>
+            Favorite songs:
+        </h3>
+        <ol>
+            <li> 
+                Johnny Cash - Bullrider
+            </li>
+            <li> 
+                Johnny Cash - Hurt
+            </li>
+        </ol>
+    </main>
+    <aside>
+        Contact Me!
+        <form action="your-server-endpoint" method="post">
+            <fieldset>
+                <legend>Contact Info</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <input list="roleList">
+                <datalist id="roleList">
+                    <option value="Recruiter">
+                    <option value="Student">
+                    <option value="Professional">
+                    <option value="Other">
+                </datalist>
+            </fieldset>
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="message" required>
+            <button type="submit">Submit</button>
+          </form>
+    </aside>
+    <footer>
+        <ol>
+            <li>
+                <a href="https://www.linkedin.com/in/mark-kemper-60599b214/">LinkedIn</a>
+            </li>
+            <li>
+                <a href="https://github.com/Mark-Kemper">GitHub</a>
+            </li>
+        </ol>
+    </footer>
+</body>
+</html>

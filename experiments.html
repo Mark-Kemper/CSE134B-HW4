@@ -1,0 +1,81 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "Mark Kemper's Personal Portfolio Website" content="Includes my resume, projects, and general information about me.">
+    <title>HW2</title>
+
+</head>
+<body>
+    <nav>
+        <a href = "./index.html">Home</a>
+        <a href = "./projects.html">Projects</a>
+        <a href = "./coursework.html">Coursework</a>
+        <a href = "./experiments.html">Experiments</a>
+    </nav>
+    <main>
+        <section>
+            <h1>
+                Experiments using HTML tags
+            </h1>
+        <textarea>
+            Here is Einstein's famous equation,
+            the one that converts mass into energy!
+            (Doesn't that violate some law of physics?)
+        </textarea>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <mrow>
+                <mi>E</mi>
+                <mo>=</mo>
+                <mi>m</mi>
+                <msup>
+                    <mi>c</mi>
+                    <mn>2</mn>
+                </msup>
+            </mrow>
+        </math>
+
+        <figure>
+            <figcaption>Listen to me coding:</figcaption>
+            <audio controls src="./keyboard.mp3">
+            <a href="./keyboard.mp3"> Download audio </a>
+            </audio>
+        </figure> 
+    </section>
+    <section>
+        <h2>Website I lead the development for</h2>
+  <iframe src="https://tquantt.ucsd.edu" width="400" height="300" frameborder="0"></iframe>
+</section>
+<section>
+    <h3>Graphics with different HTML tags</h3>
+  <svg width="200" height="200">
+    <circle cx="100" cy="100" r="80" fill="blue" />
+    <circle cx="100" cy="120" r="40" fill="green" />
+</svg>
+<canvas id="myCanvas" width="200" height="200"></canvas>
+<picture>
+    <source srcset="coding-big.png" media="(min-width: 800px)" type="image/png">
+    <img src="coding-small.png" width="200" height="200">
+</picture>
+</section>
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+
+    // Draw an orange rectangle
+    context.fillStyle = 'orange';
+    context.fillRect(50, 50, 100, 100);
+
+    // Draw a yellow circle
+    context.fillStyle = 'yellow';
+    context.beginPath();
+    context.arc(100, 100, 40, 0, 2 * Math.PI);
+    context.fill();
+</script>
+</main>
+</body>
+</html>

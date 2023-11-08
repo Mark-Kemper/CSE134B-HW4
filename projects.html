@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW2</title>
+</head>
+<body>
+    <nav>
+        <a href = "./index.html">Home</a>
+        <a href = "./projects.html">Projects</a>
+        <a href = "./coursework.html">Coursework</a>
+        <a href = "./experiments.html">Experiments</a>
+    </nav>
+    <header>
+        <h1>
+            Projects to select from:
+        </h1>
+        <select>
+            <optgroup label="Applications">
+                <option value="">3D Object Renderer</option>
+                <option value="">Johnny Cash Lyric Lookup Project</option>
+                <option value="">Birds of Feather</option>
+            </optgroup>
+            <optgroup label="Web Projects">
+            <option value="">Triton Quantitative Trading Website</option>
+            <option value="">Discord Bot Cleverbot Scraper</option>
+            </optgroup>
+        </select>
+        <details>
+            <summary>
+                Renders objects using raytracing
+            </summary>
+            <p>
+                This project allows for the rendering of both rounded and flat surfaces in different colors, positions, and sizes. The camera's focal length may also be modified, which allows for the perspective effect to be exaggerated or diminished. It works by creating a vector with an origin at a light emitter and its direction randomized. It then calculates the first collision of that light, and the bounce of the light off the surface determines which pixel on the screen is modified and the intensity of the brightness it is given. This process is repeated until the render is complete. 
+            </p>
+        </details>
+    </header>
+    <main>
+        <section>
+        <h2>Video illustrating project</h2>
+        <video autoplay src="https://user-images.githubusercontent.com/91701863/136714874-a154a114-b5ac-4f96-aacf-f06a314000e1.mp4" controls="controls" muted="muted" width = "500" height = "300"></video>
+        </video>
+        </section>
+        <h2>Code exerpts</h2>
+        <section>
+            <pre>
+                <code>                    
+void RenderEngine::emitAndRenderLight() {
+    for (Light lightEmitter : lightEmitters) {
+        vector<double> light = { (double)(rand()), (double)(-rand() + rand()), (double)(-rand() + rand()) };
+        light = convertToUnitVector(light);
+
+        //for (int x = 0; x < maximumLightBounces; x++) {
+        auto [actualCollisionPoint, actualGuideVector, shortestDistance, colorR, colorG, colorB] =
+            findCollision(lightEmitter.position, light);
+
+        /*if (actualCollisionPoint != NULL) {
+            double* bounceVector = calculateBounce(light, actualGuideVector, actualCollisionPoint);
+            auto [bounceCollisionPoint, bounceGuideVector, shortestBounce, colourR, colourG, colourB] =
+                findCollision(actualCollisionPoint, bounceVector);
+            if (bounceCollisionPoint != NULL) {
+                shortestDistance = -1;
+            }
+        }*/
+
+        if (shortestDistance > 0) {
+            if (perspective) {
+                vector<double> cameraCenter = { (camera.point1[0] + camera.point3[0]) / 2, (camera.point1[1] + camera.point3[1]) / 2,
+                    (camera.point1[2] + camera.point3[2]) / 2 };
+
+                vector<double> pointToCenterVector = subtractVectors(actualCollisionPoint, cameraCenter);
+                vector<double> cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
+                    subtractVectors(camera.point3, camera.point1));
+                cameraNormal = convertToUnitVector(cameraNormal);
+
+                double multiplyFactor = dot(pointToCenterVector, cameraNormal);
+
+                cameraNormal = multiplyByScalar(cameraNormal, multiplyFactor);
+
+                vector<double> newCenter = addVectors(cameraCenter, cameraNormal);
+
+                double focalGrowthRate = .3;
+
+                //double horizontalGrowth = checkMagnitude(subtractVectors(camera.point2, camera.point1)) * 
+                //double horizontalGrowth =	checkMagnitude(cameraNormal) * focalGrowthRate;
+                //double verticalGrowth = checkMagnitude(subtractVectors(camera.point3, camera.point1)) *
+                //double verticalGrowth =	checkMagnitude(cameraNormal) * focalGrowthRate;
+
+                double growthMultiplier = checkMagnitude(cameraNormal) * focalGrowthRate;
+
+                vector<double> newPoint1 = addVectors(camera.point1, multiplyByScalar(subtractVectors(camera.point1, camera.point2),
+                    growthMultiplier / 2));
+
+                newPoint1 = addVectors(newPoint1, multiplyByScalar(subtractVectors(camera.point1, camera.point3),
+                    growthMultiplier / 2));
+
+                newPoint1 = addVectors(newPoint1, cameraNormal);
+
+                vector<double> newPoint2 = addVectors(camera.point2, multiplyByScalar(subtractVectors(camera.point2, camera.point1),
+                    growthMultiplier / 2));
+
+                newPoint2 = addVectors(newPoint2, multiplyByScalar(subtractVectors(camera.point2, camera.point4),
+                    growthMultiplier / 2));
+
+                newPoint2 = addVectors(newPoint2, cameraNormal);
+
+                vector<double> newPoint3 = addVectors(camera.point3, multiplyByScalar(subtractVectors(camera.point3, camera.point4),
+                    growthMultiplier / 2));
+
+                newPoint3 = addVectors(newPoint3, multiplyByScalar(subtractVectors(camera.point3, camera.point1),
+                    growthMultiplier / 2));
+
+                newPoint3 = addVectors(newPoint3, cameraNormal);
+
+                vector<double> newPoint4 = addVectors(camera.point4, multiplyByScalar(subtractVectors(camera.point4, camera.point3),
+                    growthMultiplier / 2));
+
+                newPoint4 = addVectors(newPoint4, multiplyByScalar(subtractVectors(camera.point4, camera.point2),
+                    growthMultiplier / 2));
+
+                newPoint4 = addVectors(newPoint4, cameraNormal);
+
+
+                Plane newPerspectivePanel = { newPoint1, newPoint2, newPoint3, newPoint4 };
+
+                double horizontalDistance = checkMagnitude(subtractVectors(actualCollisionPoint, newPerspectivePanel.point1)) *
+                    dot(convertToUnitVector(subtractVectors(newPerspectivePanel.point2, newPerspectivePanel.point1)),
+                        convertToUnitVector(subtractVectors(actualCollisionPoint, newPerspectivePanel.point1)));
+
+                double verticalDistance = sqrt(pow(checkMagnitude(subtractVectors(actualCollisionPoint, newPerspectivePanel.point1)), 2) - pow(horizontalDistance, 2)); //pytharogran thereom
+                int xPixel = (int)((horizontalDistance / checkMagnitude(subtractVectors(newPerspectivePanel.point2, newPerspectivePanel.point1))) * xResolution);
+                int yPixel = (int)((verticalDistance / checkMagnitude(subtractVectors(newPerspectivePanel.point3, newPerspectivePanel.point1))) * yResolution);
+
+                vector<double> cameraNormalP = crossProduct(subtractVectors(camera.point2, camera.point1),
+                    subtractVectors(camera.point3, camera.point1));
+
+                cameraNormal = convertToUnitVector(cameraNormalP);
+                actualGuideVector = convertToUnitVector(actualGuideVector);
+
+                double intensity = .8 * abs(dot(actualGuideVector, cameraNormal));
+                double rColor = colorR * intensity;
+                double gColor = colorG * intensity;
+                double bColor = colorB * intensity;
+
+                vector<double> pointOnCamera = addVectors(camera.point1,
+                    multiplyByScalar(subtractVectors(camera.point2, camera.point1), (double)xPixel / xResolution));
+                pointOnCamera = addVectors(pointOnCamera,
+                    multiplyByScalar(subtractVectors(camera.point3, camera.point1), (double)yPixel / yResolution));
+
+                /*
+                vector<double> checkObstructionVector = subtractVectors(actualCollisionPoint, pointOnCamera);
+
+                auto [obstrCollisionPoint, obstrGuideVector, obstrShortestDistance, uselessR, uselessG, uselessB] =
+                    findCollision(actualCollisionPoint, checkObstructionVector);
+                    */
+                    //bool obstructed = obstrCollisionPoint.size() == 0 || abs(obstrShortestDistance) > .03;
+                bool obstructed = false;
+
+                if (xPixel < xResolution && xPixel >= 0 && yPixel < yResolution && yPixel >= 0 && !obstructed) {
+                    userScreen.incrementPixel(xPixel, yPixel, rColor, gColor, bColor);
+                    //userScreen.setEntireScreen(rand(), rand(), rand());
+                }
+            }
+
+
+            //Orthogonal is just a perspective with a focalGrowthRate of 0, so no need for separate branch.
+            if (!perspective) { //Orthogonal
+                vector<double> cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
+                    subtractVectors(camera.point3, camera.point1));
+                cameraNormal = convertToUnitVector(cameraNormal);
+                vector<double> reverseCameraNormal = multiplyByScalar(cameraNormal, -1);
+                auto [collisionPoint, planeNormal, collisionDistance, r, g, b] = calculatePlaneCollision(reverseCameraNormal, actualCollisionPoint, camera);
+                if (collisionPoint.size() > 0) {
+                    actualGuideVector = convertToUnitVector(actualGuideVector);
+                    double intensity = .8 * abs(dot(actualGuideVector, reverseCameraNormal));
+                    //assuming rectangular:
+                    //assuming point1 and point2 are the top ones. ( 1 and 3 is vertical)
+                    //and point 3 and point4 are the bottom ones. (3 and 4 (or 1 and 2) is horizontal)
+                    //horizontalDistance = p1 between | collisionPoint - p1 | *2 * ((collisionPoint - p1) dot(p3 - p1));
+                    double horizontalDistance = checkMagnitude(subtractVectors(collisionPoint, camera.point1)) *
+                        dot(convertToUnitVector(subtractVectors(camera.point2, camera.point1)),
+                            convertToUnitVector(subtractVectors(collisionPoint, camera.point1)));
+                    double verticalDistance = sqrt(pow(checkMagnitude(subtractVectors(collisionPoint, camera.point1)), 2) - pow(horizontalDistance, 2)); //pytharogran thereom
+                    int xPixel = (int)((horizontalDistance / checkMagnitude(subtractVectors(camera.point2, camera.point1))) * xResolution);
+                    int yPixel = (int)((verticalDistance / checkMagnitude(subtractVectors(camera.point3, camera.point1))) * yResolution);
+                    double rColor = (colorR * intensity);
+                    double gColor = (colorG * intensity);
+                    double bColor = (colorB * intensity);
+                    if (xPixel < xResolution && xPixel >= 0 && yPixel < yResolution && yPixel >= 0) {
+                        userScreen.incrementPixel(xPixel, yPixel, rColor, gColor, bColor);
+                        //userScreen.setEntireScreen(rand(), rand(), rand());
+                    }
+                }
+            }
+        }
+    }
+}
+                </code>
+            </pre>
+        </section>
+    </main>
+</body>
+</html>
