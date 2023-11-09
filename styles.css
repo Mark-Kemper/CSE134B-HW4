@@ -7,22 +7,13 @@
 h1, h2, h3 {  
     color:rgb(5, 129, 236);
 }
-h1 {
-    font-size: 5dvh;
-}
-h2 {
-    font-size: 4.5dvh;
-}
-h3  {
-    font-size: 4dvh;
-}
 
 html {
     background-color: var(--website-background-color, lightblue);
 }
 * {
     font-family: 'Poppins', 'Trebuchet MS', sans-serif;
-    font-size: 3dvw;
+    /* font-size: 3dvw; */
 }
 
 .flex-container {
@@ -71,6 +62,18 @@ nav a {
 @media (min-width: 0px) and (max-width: 480px) {
     nav {
         min-height: 7vh;
+    }
+    * {
+        font-size: 3vw;
+    }
+    h1 {
+        font-size: 5vh;
+    }
+    h2 {
+        font-size: 4.5vh;
+    }
+    h3  {
+        font-size: 4vh;
     }
 }
 
