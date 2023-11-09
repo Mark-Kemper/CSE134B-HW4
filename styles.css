@@ -60,14 +60,14 @@ nav a {
 /* Phone */
 @media (min-width: 0px) and (max-width: 480px) {
     nav {
-        min-height: 10vh;
+        min-height: 7vh;
     }
 }
 
 /* Laptop */
 @media (min-width: 481px) and (max-width: 768px) {
     nav {
-        min-height: 8vh;
+        min-height: 6vh;
     }
 }
 
