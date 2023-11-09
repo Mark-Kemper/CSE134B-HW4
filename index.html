@@ -27,7 +27,11 @@
                     <h1>
                         Mark Kemper
                     </h1>
-                    <img src = "https://lh3.google.com/u/0/d/10LJP6xcsH9Z6Bmh1bWteR7CaF5Bz_LGt=w1366-h768-iv1" alt="Image of Mark Kemper" width="243" height="324">
+                    <picture>
+                        <source media="(max-width: 600px)" srcset="Headshot_medium.jpg">
+                        <img src="Headshot_big.jpg" alt="Mark Kemper Headshot">
+                    </picture>
+                    <!-- <img src = "./Mark_Kemper_Headshot.jpg" alt="Image of Mark Kemper" width="243" height="324"> -->
                 </div>
                 <section id="aboutme">
                     <h2>
@@ -46,13 +50,21 @@
                     </ul>
                     <div class="flex-container">
                         <figure>
-                            <img src="./quantitativeTrading.jpg" width ="300" height = "200">
+                            <picture>
+                                <source media="(max-width: 600px)" srcset="./quantitativeTrading-small.jpg">
+                                <img src="quantitativeTrading-medium.jpg" alt="Image showing Stock Charts to represent Quantiative Trading">
+                            </picture>
+                            <!-- <img src="./quantitativeTrading.jpg" alt = "Image showing Stock Charts to represent Quantiative Trading"> -->
                             <figcaption>
                                 <cite>Image by Getty Images/iStockphoto</cite>
                             </figcaption>
                         </figure>
                         <figure>
-                            <img src="./ICPC.jpg" width ="430" height = "300">
+                            <picture>
+                                <source media="(max-width: 600px)" srcset="./ICPC-small.jpg">
+                                <img src="ICPC-medium.jpg" alt="Image of my ICPC 2023 SoCal Regional Team">
+                            </picture>
+                            <!-- <img src="./ICPC.jpg" width ="430" height = "300"> -->
                             <figcaption>
                                 <em>Competing at the 2023 ICPC SoCal Regional</em>
                                 <!-- Taken on my own iPhone -->

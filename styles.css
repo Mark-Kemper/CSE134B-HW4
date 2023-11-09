@@ -4,12 +4,8 @@
     --green-mixed-color: color-mix(color(display-p3 0.7 0.2 0.1), color(display-p3 0.2 0.5 0.8), 80%);
 }
 
-h1, h2, h3 {
-    /* color: blue; */
-    /* color:  */
-    /* color: var(--green-mixed-color) */   
+h1, h2, h3 {  
     color:rgb(5, 129, 236);
-    text-align: center;
 }
 
 html {
@@ -36,6 +32,11 @@ section div {
 code {
     font-family: 'Consolas'
 }
+
+section pre {
+    background-color:white
+}
+
 li:has(a) {
     background-color: lightblue;
 }
@@ -103,7 +104,7 @@ nav a:active {
 }
 
 #aboutme{
-    margin: 10px;
+    margin-left: 2%;
     /* margin-right: 10% */
 }
 
@@ -124,9 +125,12 @@ nav a:active {
       }
   }
 
-img {
+picture img {
     max-width: 100%;
     height: auto;
+    object-fit: contain;
+    width: 70%;
+    height: 70%;
 }
 
 img:hover {
