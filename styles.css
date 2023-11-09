@@ -65,6 +65,9 @@ nav a {
     nav {
         min-height: 7vh;
     }
+    nav a {
+        font-size: 1.3rem;
+    }
 }
 
 /* Laptop */
