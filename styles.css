@@ -11,10 +11,14 @@ h1, h2, h3 {
 html {
     background-color: var(--website-background-color, lightblue);
 }
-*:not(h1):not(h2):not(h3) {
+* {
     font-family: 'Poppins', 'Trebuchet MS', sans-serif;
-    font-size: 1rem;
 }
+p {
+    font-size: 1.2rem;
+}
+
+
 
 .flex-container {
     display: flex;
@@ -66,7 +70,7 @@ nav a {
         min-height: 7vh;
     }
     nav a {
-        font-size: 1.3rem;
+        font-size: 2rem;
     }
 }
 
