@@ -11,7 +11,7 @@ h1, h2, h3 {
 html {
     background-color: var(--website-background-color, lightblue);
 }
-* {
+*:not(h1):not(h2):not(h3) {
     font-family: 'Poppins', 'Trebuchet MS', sans-serif;
     font-size: 1rem;
 }
@@ -64,9 +64,6 @@ nav a {
 @media (min-width: 0px) and (max-width: 480px) {
     nav {
         min-height: 7vh;
-    }
-    nav a {
-        font-size: 1.5rem;
     }
 }
 
