@@ -13,21 +13,14 @@ html {
 }
 * {
     font-family: 'Poppins', 'Trebuchet MS', sans-serif;
-    /* border: 1px solid black */
 }
 
 .flex-container {
     display: flex;
-    flex-direction: row; /* or column, depending on your layout */
+    flex-direction: row;
     justify-content: center;
     align-items: top;
-    /* justify-content: center; Horizontally center the items */
-
   }
-/* 
-section div {
-    margin: 10px;
-} */
 
 code {
     font-family: 'Consolas'
@@ -49,12 +42,7 @@ nav {
     justify-content: center;
     min-height: 5vh;
     background-color: var(--blue-wide-gamut-color, blue);
-    /* border: 5px;
-    padding: 5px; */
     border: 5px solid var(--blue-wide-gamut-color, blue);
-    /* font-size: 1em; */
-    /* box-sizing: border-box; */
-    /* rgb(190, 190, 255) */
 }
 
 nav a {
@@ -90,7 +78,6 @@ nav a {
     }
 }
 
-
 nav a:hover {
     color: blue;
     background-color: white;
@@ -105,13 +92,7 @@ nav a:active {
 
 #aboutme{
     margin-left: 2%;
-    /* margin-right: 10% */
 }
-
-/* #icpc { */
-    /* margin-top: 10px; */
-    /* margin-right: 10%; */
-/* } */
 
 @keyframes scaleAndRotate {
     0% {
@@ -137,6 +118,7 @@ img {
 #headshot {
     object-position: top center;
 }
+
 img:hover {
     animation: scaleAndRotate .3s linear 1;
 }
