@@ -56,8 +56,8 @@ nav a {
     border: 1px solid black;
     margin: 5px;
     transition: margin 0.15s ease;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 /* Phone */
