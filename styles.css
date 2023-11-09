@@ -125,14 +125,18 @@ nav a:active {
       }
   }
 
-picture img {
+img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
+    object-position: bottom center;
     width: 70%;
     height: 70%;
+    /* border: 1px solid black */
 }
-
+#headshot {
+    object-position: top center;
+}
 img:hover {
     animation: scaleAndRotate .3s linear 1;
 }
