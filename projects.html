@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HW2</title>
+    <title>CSE 134B HW3</title>
+    <link rel = "stylesheet" type="text/css" href="styles.css">
+    <link rel = "stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 </head>
 <body>
     <nav>
         <a href = "./index.html">Home</a>
         <a href = "./projects.html">Projects</a>
         <a href = "./coursework.html">Coursework</a>
-        <a href = "./experiments.html">Experiments</a>
     </nav>
     <header>
         <h1>
@@ -47,7 +48,7 @@
                 <code>                    
 void RenderEngine::emitAndRenderLight() {
     for (Light lightEmitter : lightEmitters) {
-        vector<double> light = { (double)(rand()), (double)(-rand() + rand()), (double)(-rand() + rand()) };
+        vector&gtdouble&lt light = { (double)(rand()), (double)(-rand() + rand()), (double)(-rand() + rand()) };
         light = convertToUnitVector(light);
 
         //for (int x = 0; x < maximumLightBounces; x++) {
@@ -65,11 +66,11 @@ void RenderEngine::emitAndRenderLight() {
 
         if (shortestDistance > 0) {
             if (perspective) {
-                vector<double> cameraCenter = { (camera.point1[0] + camera.point3[0]) / 2, (camera.point1[1] + camera.point3[1]) / 2,
+                vector&gtdouble&lt cameraCenter = { (camera.point1[0] + camera.point3[0]) / 2, (camera.point1[1] + camera.point3[1]) / 2,
                     (camera.point1[2] + camera.point3[2]) / 2 };
 
-                vector<double> pointToCenterVector = subtractVectors(actualCollisionPoint, cameraCenter);
-                vector<double> cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
+                vector&gtdouble&lt pointToCenterVector = subtractVectors(actualCollisionPoint, cameraCenter);
+                vector&gtdouble&lt cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
                     subtractVectors(camera.point3, camera.point1));
                 cameraNormal = convertToUnitVector(cameraNormal);
 
@@ -77,7 +78,7 @@ void RenderEngine::emitAndRenderLight() {
 
                 cameraNormal = multiplyByScalar(cameraNormal, multiplyFactor);
 
-                vector<double> newCenter = addVectors(cameraCenter, cameraNormal);
+                vector&gtdouble&lt newCenter = addVectors(cameraCenter, cameraNormal);
 
                 double focalGrowthRate = .3;
 
@@ -88,7 +89,7 @@ void RenderEngine::emitAndRenderLight() {
 
                 double growthMultiplier = checkMagnitude(cameraNormal) * focalGrowthRate;
 
-                vector<double> newPoint1 = addVectors(camera.point1, multiplyByScalar(subtractVectors(camera.point1, camera.point2),
+                vector&gtdouble&lt newPoint1 = addVectors(camera.point1, multiplyByScalar(subtractVectors(camera.point1, camera.point2),
                     growthMultiplier / 2));
 
                 newPoint1 = addVectors(newPoint1, multiplyByScalar(subtractVectors(camera.point1, camera.point3),
@@ -96,7 +97,7 @@ void RenderEngine::emitAndRenderLight() {
 
                 newPoint1 = addVectors(newPoint1, cameraNormal);
 
-                vector<double> newPoint2 = addVectors(camera.point2, multiplyByScalar(subtractVectors(camera.point2, camera.point1),
+                vector&gtdouble&lt newPoint2 = addVectors(camera.point2, multiplyByScalar(subtractVectors(camera.point2, camera.point1),
                     growthMultiplier / 2));
 
                 newPoint2 = addVectors(newPoint2, multiplyByScalar(subtractVectors(camera.point2, camera.point4),
@@ -104,7 +105,7 @@ void RenderEngine::emitAndRenderLight() {
 
                 newPoint2 = addVectors(newPoint2, cameraNormal);
 
-                vector<double> newPoint3 = addVectors(camera.point3, multiplyByScalar(subtractVectors(camera.point3, camera.point4),
+                vector&gtdouble&lt newPoint3 = addVectors(camera.point3, multiplyByScalar(subtractVectors(camera.point3, camera.point4),
                     growthMultiplier / 2));
 
                 newPoint3 = addVectors(newPoint3, multiplyByScalar(subtractVectors(camera.point3, camera.point1),
@@ -112,7 +113,7 @@ void RenderEngine::emitAndRenderLight() {
 
                 newPoint3 = addVectors(newPoint3, cameraNormal);
 
-                vector<double> newPoint4 = addVectors(camera.point4, multiplyByScalar(subtractVectors(camera.point4, camera.point3),
+                vector&gtdouble&lt newPoint4 = addVectors(camera.point4, multiplyByScalar(subtractVectors(camera.point4, camera.point3),
                     growthMultiplier / 2));
 
                 newPoint4 = addVectors(newPoint4, multiplyByScalar(subtractVectors(camera.point4, camera.point2),
@@ -131,7 +132,7 @@ void RenderEngine::emitAndRenderLight() {
                 int xPixel = (int)((horizontalDistance / checkMagnitude(subtractVectors(newPerspectivePanel.point2, newPerspectivePanel.point1))) * xResolution);
                 int yPixel = (int)((verticalDistance / checkMagnitude(subtractVectors(newPerspectivePanel.point3, newPerspectivePanel.point1))) * yResolution);
 
-                vector<double> cameraNormalP = crossProduct(subtractVectors(camera.point2, camera.point1),
+                vector&gtdouble&lt cameraNormalP = crossProduct(subtractVectors(camera.point2, camera.point1),
                     subtractVectors(camera.point3, camera.point1));
 
                 cameraNormal = convertToUnitVector(cameraNormalP);
@@ -142,13 +143,13 @@ void RenderEngine::emitAndRenderLight() {
                 double gColor = colorG * intensity;
                 double bColor = colorB * intensity;
 
-                vector<double> pointOnCamera = addVectors(camera.point1,
+                vector&gtdouble&lt pointOnCamera = addVectors(camera.point1,
                     multiplyByScalar(subtractVectors(camera.point2, camera.point1), (double)xPixel / xResolution));
                 pointOnCamera = addVectors(pointOnCamera,
                     multiplyByScalar(subtractVectors(camera.point3, camera.point1), (double)yPixel / yResolution));
 
                 /*
-                vector<double> checkObstructionVector = subtractVectors(actualCollisionPoint, pointOnCamera);
+                vector&gtdouble&lt checkObstructionVector = subtractVectors(actualCollisionPoint, pointOnCamera);
 
                 auto [obstrCollisionPoint, obstrGuideVector, obstrShortestDistance, uselessR, uselessG, uselessB] =
                     findCollision(actualCollisionPoint, checkObstructionVector);
@@ -165,10 +166,10 @@ void RenderEngine::emitAndRenderLight() {
 
             //Orthogonal is just a perspective with a focalGrowthRate of 0, so no need for separate branch.
             if (!perspective) { //Orthogonal
-                vector<double> cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
+                vector&gtdouble&lt cameraNormal = crossProduct(subtractVectors(camera.point2, camera.point1),
                     subtractVectors(camera.point3, camera.point1));
                 cameraNormal = convertToUnitVector(cameraNormal);
-                vector<double> reverseCameraNormal = multiplyByScalar(cameraNormal, -1);
+                vector&gtdouble&lt reverseCameraNormal = multiplyByScalar(cameraNormal, -1);
                 auto [collisionPoint, planeNormal, collisionDistance, r, g, b] = calculatePlaneCollision(reverseCameraNormal, actualCollisionPoint, camera);
                 if (collisionPoint.size() > 0) {
                     actualGuideVector = convertToUnitVector(actualGuideVector);
