@@ -13,7 +13,7 @@ html {
 }
 * {
     font-family: 'Poppins', 'Trebuchet MS', sans-serif;
-    /* font-size: 3dvw; */
+    font-size: 1rem;
 }
 
 .flex-container {
@@ -41,7 +41,7 @@ li:has(a):hover {
 nav {
     display: flex;
     justify-content: center;
-    min-height: 5vh;
+    min-height: 3vh;
     background-color: var(--blue-wide-gamut-color, blue);
     border: 5px solid var(--blue-wide-gamut-color, blue);
 }
@@ -52,7 +52,7 @@ nav a {
     border-radius: 10px;
     text-decoration: none;
     color: darkblue;
-    font-size: 4dvh;
+    /* font-size: 1rem; */
     border: 1px solid black;
     margin: 5px;
     transition: margin 0.15s ease;
@@ -65,39 +65,15 @@ nav a {
     nav {
         min-height: 7vh;
     }
-    * {
-        font-size: 3vh;
-    }
-    h1 {
-        font-size: 5vh;
-    }
-    h2 {
-        font-size: 4.5vh;
-    }
-    h3  {
-        font-size: 4vh;
+    nav a {
+        font-size: 1.5rem;
     }
 }
 
 /* Laptop */
 @media (min-width: 481px) and (max-width: 768px) {
-    /* nav {
-        min-height: 6vh;
-    } */
     nav {
-        min-height: 7vh;
-    }
-    * {
-        font-size: 3vw;
-    }
-    h1 {
-        font-size: 5vh;
-    }
-    h2 {
-        font-size: 4.5vh;
-    }
-    h3  {
-        font-size: 4vh;
+        min-height: 6vh;
     }
 }
 
