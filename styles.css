@@ -79,8 +79,23 @@ nav a {
 
 /* Laptop */
 @media (min-width: 481px) and (max-width: 768px) {
-    nav {
+    /* nav {
         min-height: 6vh;
+    } */
+    nav {
+        min-height: 7vh;
+    }
+    * {
+        font-size: 3vw;
+    }
+    h1 {
+        font-size: 5vh;
+    }
+    h2 {
+        font-size: 4.5vh;
+    }
+    h3  {
+        font-size: 4vh;
     }
 }
 
