@@ -1,0 +1,134 @@
+:root {
+    --website-background-color: rgb(230, 237, 240);
+    --blue-wide-gamut-color: color(display-p3 0.75 0.75 0.96  );
+    --green-mixed-color: color-mix(color(display-p3 0.7 0.2 0.1), color(display-p3 0.2 0.5 0.8), 80%);
+}
+
+h1, h2, h3 {
+    /* color: blue; */
+    /* color:  */
+    /* color: var(--green-mixed-color) */   
+    color:rgb(5, 129, 236);
+    text-align: center;
+}
+
+html {
+    background-color: var(--website-background-color, lightblue);
+}
+* {
+    font-family: 'Poppins', 'Trebuchet MS', sans-serif;
+    /* border: 1px solid black */
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row; /* or column, depending on your layout */
+    justify-content: center;
+    align-items: top;
+    /* justify-content: center; Horizontally center the items */
+
+  }
+/* 
+section div {
+    margin: 10px;
+} */
+
+code {
+    font-family: 'Consolas'
+}
+li:has(a) {
+    background-color: lightblue;
+}
+li:has(a):hover {
+    background-color: white
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    min-height: 5vh;
+    background-color: var(--blue-wide-gamut-color, blue);
+    /* border: 5px;
+    padding: 5px; */
+    border: 5px solid var(--blue-wide-gamut-color, blue);
+    /* font-size: 1em; */
+    /* box-sizing: border-box; */
+    /* rgb(190, 190, 255) */
+}
+
+nav a {
+    flex: 1;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: darkblue;
+    font-size: 2dvw;
+    border: 1px solid black;
+    margin: 5px;
+    transition: margin 0.15s ease;
+}
+
+/* Phone */
+@media (min-width: 0px) and (max-width: 480px) {
+    nav a {
+        font-size: 4dvw;
+    }
+}
+
+/* Laptop */
+@media (min-width: 481px) and (max-width: 768px) {
+    nav a {
+        font-size: 2.5dvw;
+    }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    nav a {
+        font-size: 2dvw;
+    }
+}
+
+
+nav a:hover {
+    color: blue;
+    background-color: white;
+    margin: 3px;
+    border-radius: 8px
+}
+
+nav a:active {
+    color: green;
+    margin: 2px;
+}
+
+#aboutme{
+    margin: 10px;
+    /* margin-right: 10% */
+}
+
+/* #icpc { */
+    /* margin-top: 10px; */
+    /* margin-right: 10%; */
+/* } */
+
+@keyframes scaleAndRotate {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(3deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+      }
+  }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img:hover {
+    animation: scaleAndRotate .3s linear 1;
+}
