@@ -56,7 +56,6 @@ nav a {
     border-radius: 10px;
     text-decoration: none;
     color: darkblue;
-    /* font-size: 1rem; */
     border: 1px solid black;
     margin: 5px;
     transition: margin 0.15s ease;
@@ -70,7 +69,7 @@ nav a {
         min-height: 7vh;
     }
     nav a {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 
@@ -79,12 +78,18 @@ nav a {
     nav {
         min-height: 6vh;
     }
+    nav a {
+        font-size: 2rem;
+    }
 }
 
 /* Desktop */
 @media (min-width: 769px) {
     nav {
         min-height: 5vh;
+    }
+    nav a {
+        font-size: 1.3rem;
     }
 }
 
