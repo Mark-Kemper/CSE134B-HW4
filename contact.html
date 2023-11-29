@@ -3,38 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesz.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="formstyles.css">
     <title>Contact Form</title>
 </head>
 <body>
-
     <div class="container">
-        <form id="contactForm" action="https://httpbin.org/post" method="post">
+        <h1>Themes</h1>
+        <input type="checkbox" id="modeToggle">Toggle Dark Mode</button>
+        <noscript>
+            <p>Please enable JavaScript to use the mode toggle.</p>
+        </noscript>
+    </div>
+    <div class="container">
+        <form id="contactForm" action="https://httpbin.org/post" method="post" novalidate>
             <label for="name">Name: <span class="required">*</span></label>
-            <input type="text" id="name" name="name" required>
-            <output id="errorOutput" for="name">Empty name</output>
-            <output id="infoOutput" for="name"></output>
+            <input type="text" id="name" name="name" required   >
+            <output id="nameError" class="errorOutput" for="name">Empty name</output>
+            <output id="nameInfo" for="name"></output>
 
             <label for="email">Email: <span class="required">*</span></label>
             <input type="email" id="email" name="email" required>
-            <output id="errorOutput" for="email">Invalid email provided</output>
-            <output id="infoOutput" for="email"></output>
+            <output id="emailError" class="errorOutput" for="email">Invalid email provided</output>
+            <output id="emailInfo" for="email"></output>
 
             <label for="comments">Comments: <span class="required">*</span></label>
-            <input id="comments" name="comments" maxlength="100" pattern="[a-zA-z0-9\s\.,;:%'!?\-]+" required></input>
-            <output id="errorOutput" for="name">Invalid comment</output>
-            <output id="infoOutput" for="name"></output>
+            <!-- <input id="comments" name="comments" maxlength="100" pattern="[a-zA-z0-9\s\.,;:%'!?\-]+" required></input> -->
+            <textarea id = "comments" name = "comments" cols = "4" pattern="[a-zA-z0-9\s\.,;:%'!?\-]+" maxlength = "100" required></textarea>
+            <div class="flexcontainer">
+                <output id="commentsError" class="errorOutput" for="name">Invalid comment</output>
+                <output id="commentsInfo" class = "infoOutput" for="name"></output>
+            </div>
             <input type="hidden" name="possible_bot" value="true">
-
-            <!-- <div class="output"> -->
-                <!-- <output id="errorOutput" for="name"></output>
-                <output id="infoOutput" for="name"></output> -->
-            <!-- </div> -->
-
             <button type="submit">Submit</button>
         </form>
     </div>
+    <script src="script.js"></script>
+    <script defer>
+        const regex = /[a-zA-z0-9\s\.,;:%'!?\-]+/   
+        function isValidPattern(pattern, value) {
+            return pattern.test(value);
+        }
+        console.log(isValidPattern(/[A-Za-z]+/, "a"))
+        function maskInput(element) {
+            var pattern = new RegExp(element.pattern);
 
-    <script src="script.js" defer></script>
+            if (!pattern.test(element.value)) {
+                element.setCustomValidity(''); // Clear default error message
+                displayErrorMessage(element);
+            } else {
+                element.setCustomValidity('');
+                hideErrorMessage(element);
+            }
+        }
+
+        function displayErrorMessage(element) {
+            var errorMessageId = element.id + 'Error';
+            console.log(errorMessageId)
+            var errorMessageElement = document.getElementById(errorMessageId);
+            errorMessageElement.textContent = element.validationMessage;
+            errorMessageElement.style.opacity = '1';
+
+            // Fade out the error message after 3 seconds
+            setTimeout(function() {
+                hideErrorMessage(element);
+            }, 2000);
+        }
+
+        function hideErrorMessage(element) {
+            console.log("Hiding ", element.id)
+            var errorMessageId = element.id + 'Error';
+            var errorMessageElement = document.getElementById(errorMessageId);
+            errorMessageElement.style.opacity = '0';
+        }
+        console.log(document.getElementById('contactForm'))
+        // document.getElementById('contactForm')
+        var textarea = document.getElementById("comments")
+        var commentsInfo = document.getElementById("commentsInfo")
+        const form_errors = []
+
+        textarea.addEventListener('keydown' , function(args) {
+            console.log( textarea.value.length)
+            const charsLeft =  textarea.getAttribute('maxlength') - textarea.value.length
+            commentsInfo.textContent = charsLeft
+            if (charsLeft <= 10) {
+                commentsInfo.style.color = "red"
+            }
+            else if (charsLeft <= 30) {
+                commentsInfo.style.color = "yellowgreen"
+            }
+            else {
+                commentsInfo.style.color = ""
+            }
+            if (!isValidPattern(regex, args.key)) {
+                textarea.setCustomValidity('Attempted to input invalid character');
+                form_errors.push({commentsMistake: textarea.validationMessage})
+                console.log(textarea.validity)
+                console.log(textarea.validationMessage)
+                console.log("preventing")
+                textarea.classList.add('flash-animation');
+                setTimeout(function() {
+                    textarea.classList.remove('flash-animation');
+                }, .5 * 3 * 1000);
+                event.preventDefault();
+                displayErrorMessage(textarea);
+                event.preventDefault();
+            }
+
+        })
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            var nameInput = document.getElementById('name');
+            var emailInput = document.getElementById('email');
+            var commentsInput = document.getElementById('comments');
+            var preventIt = false;
+            if (!nameInput.checkValidity()) {
+                preventIt=true;
+                form_errors.push({nameMistake: nameInput.validationMessage})
+                displayErrorMessage(nameInput);
+            }
+            if (!emailInput.checkValidity()) {
+                preventIt=true;
+                form_errors.push({emailMistake: emailInput.validationMessage})
+                displayErrorMessage(emailInput);
+            }
+            if (!commentsInput.checkValidity()) {
+                preventIt=true;
+                form_errors.push({commentsMistake: commentsInput.validationMessage})
+                displayErrorMessage(commentsInput);
+            }
+
+            if (preventIt) {
+                console.log(form_errors)
+                event.preventDefault();
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // Specify the content type if sending JSON data
+                        // Additional headers if needed
+                    },
+                    body: JSON.stringify(form_errors) // Convert the data to JSON format
+                };
+
+                // Make the POST request
+                fetch("https://httpbin.org/post", requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Response:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
