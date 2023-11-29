@@ -44,18 +44,6 @@
         function isValidPattern(pattern, value) {
             return pattern.test(value);
         }
-        console.log(isValidPattern(/[A-Za-z]+/, "a"))
-        function maskInput(element) {
-            var pattern = new RegExp(element.pattern);
-
-            if (!pattern.test(element.value)) {
-                element.setCustomValidity(''); // Clear default error message
-                displayErrorMessage(element);
-            } else {
-                element.setCustomValidity('');
-                hideErrorMessage(element);
-            }
-        }
 
         function displayErrorMessage(element) {
             var errorMessageId = element.id + 'Error';
@@ -63,21 +51,17 @@
             var errorMessageElement = document.getElementById(errorMessageId);
             errorMessageElement.textContent = element.validationMessage;
             errorMessageElement.style.opacity = '1';
-
-            // Fade out the error message after 3 seconds
             setTimeout(function() {
                 hideErrorMessage(element);
             }, 2000);
         }
 
         function hideErrorMessage(element) {
-            console.log("Hiding ", element.id)
             var errorMessageId = element.id + 'Error';
             var errorMessageElement = document.getElementById(errorMessageId);
             errorMessageElement.style.opacity = '0';
         }
         console.log(document.getElementById('contactForm'))
-        // document.getElementById('contactForm')
         var textarea = document.getElementById("comments")
         var commentsInfo = document.getElementById("commentsInfo")
         const form_errors = []
@@ -104,6 +88,7 @@
                 textarea.classList.add('flash-animation');
                 setTimeout(function() {
                     textarea.classList.remove('flash-animation');
+                    textarea.setCustomValidity('');
                 }, .5 * 3 * 1000);
                 event.preventDefault();
                 displayErrorMessage(textarea);
