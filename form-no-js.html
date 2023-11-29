@@ -3,11 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesz.css">
-    <title>Contact Form</title>
+        <title>Contact Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            margin-bottom: 16px;
+            padding: 8px;
+        }
+
+        input:required, textarea:required {
+            background-color: white
+        }
+
+        input:optional, textarea:optional {
+            background-color: lightgray
+        }
+
+        input:user-invalid {
+            background-color: lightcoral;
+            margin-bottom: 8px;
+        }
+
+        #errorOutput {
+            margin-bottom: 8px;
+            margin-top: 2px;
+            padding: 0px;
+            color: red;
+            display: none
+        }
+
+        input:user-invalid + #errorOutput {
+            display: block;
+        }
+
+        .required {
+            color: red
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #dddddd;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+    </style>
 </head>
 <body>
-
     <div class="container">
         <form id="contactForm" action="https://httpbin.org/post" method="post">
             <label for="name">Name: <span class="required">*</span></label>

@@ -24,8 +24,6 @@ input {
     padding: 8px;
 }
 
-
-
 input:required, textarea:required {
     background-color: white
 }
@@ -33,10 +31,6 @@ input:required, textarea:required {
 input:optional, textarea:optional {
     background-color: lightgray
 }
-
-/* input:invalid, textarea:invalid {
-    background-color: #882222
-} */
 
 input:user-invalid {
     background-color: lightcoral;
