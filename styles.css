@@ -2,6 +2,10 @@
     --website-background-color: rgb(230, 237, 240);
     --blue-wide-gamut-color: color(display-p3 0.75 0.75 0.96  );
     --green-mixed-color: color-mix(color(display-p3 0.7 0.2 0.1), color(display-p3 0.2 0.5 0.8), 80%);
+    --light-mode-background-color: rgb(240, 240, 240);
+    --light-mode-text-color: rgb(20, 20, 20);
+    --dark-mode-background-color: rgb(20, 20, 20);
+    --dark-mode-text-color: rgb(240, 240, 240);
 }
 
 h1, h2, h3 {  
@@ -51,17 +55,17 @@ li:has(a):hover {
 }
 
 .light-mode {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--light-mode-background-color, white);
+    color: var(--light-mode-text-color, black);
 }
 
 #modeToggle{
     display: none;
-}
+}   
 
 .dark-mode {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--dark-mode-background-color, black);
+    color: var(--dark-mode-text-color, white);
 }
 
 nav {
