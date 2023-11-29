@@ -47,7 +47,6 @@
 
         function displayErrorMessage(element) {
             var errorMessageId = element.id + 'Error';
-            console.log(errorMessageId)
             var errorMessageElement = document.getElementById(errorMessageId);
             errorMessageElement.textContent = element.validationMessage;
             errorMessageElement.style.opacity = '1';
@@ -61,13 +60,11 @@
             var errorMessageElement = document.getElementById(errorMessageId);
             errorMessageElement.style.opacity = '0';
         }
-        console.log(document.getElementById('contactForm'))
         var textarea = document.getElementById("comments")
         var commentsInfo = document.getElementById("commentsInfo")
         const form_errors = []
 
         textarea.addEventListener('keydown' , function(args) {
-            console.log( textarea.value.length)
             const charsLeft =  textarea.getAttribute('maxlength') - textarea.value.length
             commentsInfo.textContent = charsLeft
             if (charsLeft <= 10) {
@@ -82,9 +79,6 @@
             if (!isValidPattern(regex, args.key)) {
                 textarea.setCustomValidity('Attempted to input invalid character');
                 form_errors.push({commentsMistake: textarea.validationMessage})
-                console.log(textarea.validity)
-                console.log(textarea.validationMessage)
-                console.log("preventing")
                 textarea.classList.add('flash-animation');
                 setTimeout(function() {
                     textarea.classList.remove('flash-animation');
@@ -118,7 +112,6 @@
             }
 
             if (preventIt) {
-                console.log(form_errors)
                 event.preventDefault();
                 const requestOptions = {
                     method: 'POST',
