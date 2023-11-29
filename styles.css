@@ -18,6 +18,10 @@ p {
     font-size: 1.2rem;
 }
 
+#darkmodelabel {
+    background-color: azure;
+    margin: 5px 5px 5px 5px
+}
 
 
 .flex-container {
@@ -35,11 +39,29 @@ section pre {
     background-color:white
 }
 
-li:has(a) {
+/* li:has(a) {
     background-color: lightblue;
 }
 li:has(a):hover {
     background-color: white
+} */
+
+#contact-header {
+    font-size: 1.5  rem;
+}
+
+.light-mode {
+    background-color: #fff;
+    color: #000;
+}
+
+#modeToggle{
+    display: none;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
 }
 
 nav {
